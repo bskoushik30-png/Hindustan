@@ -89,27 +89,30 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
       {/* Welcome Banner Card */}
       <div
+        className="dashboard-welcome-banner"
         style={{
           background: 'linear-gradient(135deg, #f3ebe0 0%, #e6d7c3 100%)',
           borderRadius: 'var(--radius-xl)',
-          padding: '2rem 2.25rem',
+          padding: '1.75rem 2rem',
           border: '1px solid var(--border-medium)',
           boxShadow: 'var(--shadow-md)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '1.5rem'
+          gap: '1.25rem'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flex: 1, minWidth: '300px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flex: 1, minWidth: '240px' }}>
           <img
             src="/logo-icon-transparent.png"
             alt="Hindustan Saw Mill Logo"
+            className="welcome-banner-logo"
             style={{
               width: '64px',
               height: '64px',
               objectFit: 'contain',
+              flexShrink: 0,
               filter: 'drop-shadow(0 4px 12px rgba(38, 29, 21, 0.2))'
             }}
           />

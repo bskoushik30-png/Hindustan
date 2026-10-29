@@ -160,8 +160,8 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
         </div>
 
         {/* Filter and Search Bar */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
-          <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
+        <div className="history-filter-bar">
+          <div style={{ position: 'relative', flex: 1, minWidth: '200px' }}>
             <Search
               size={16}
               color="var(--text-subtle)"
@@ -172,37 +172,39 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
               placeholder="Search by Sheet Name, Customer, Project, or Ref No..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ paddingLeft: '2.25rem' }}
+              style={{ paddingLeft: '2.25rem', width: '100%' }}
             />
           </div>
 
-          {/* Date Range Quick Filter */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <Filter size={14} color="var(--text-subtle)" />
-            <select
-              value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value as any)}
-              style={{ width: '130px', fontSize: '0.88rem' }}
-            >
-              <option value="all">All Dates</option>
-              <option value="today">Today</option>
-              <option value="week">Past 7 Days</option>
-              <option value="month">Past 30 Days</option>
-            </select>
-          </div>
+          <div className="history-selects-row">
+            {/* Date Range Quick Filter */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flex: 1 }}>
+              <Filter size={14} color="var(--text-subtle)" />
+              <select
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value as any)}
+                style={{ fontSize: '0.88rem', width: '100%' }}
+              >
+                <option value="all">All Dates</option>
+                <option value="today">Today</option>
+                <option value="week">Past 7 Days</option>
+                <option value="month">Past 30 Days</option>
+              </select>
+            </div>
 
-          {/* Sorting */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              style={{ width: '150px', fontSize: '0.88rem' }}
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="cft_desc">Highest CFT</option>
-              <option value="pieces_desc">Highest Pieces</option>
-            </select>
+            {/* Sorting */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flex: 1 }}>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                style={{ fontSize: '0.88rem', width: '100%' }}
+              >
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="cft_desc">Highest CFT</option>
+                <option value="pieces_desc">Highest Pieces</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>

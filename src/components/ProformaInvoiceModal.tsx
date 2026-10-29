@@ -97,14 +97,14 @@ export const ProformaInvoiceModal: React.FC<ProformaInvoiceProps> = ({
 
   // Consignee (Ship to)
   const [consigneeName, setConsigneeName] = useState(sheet?.customerName || '');
-  const [consigneeAddress, setConsigneeAddress] = useState('');
+  const [consigneeAddress, setConsigneeAddress] = useState(sheet?.customerAddress || '');
   const [consigneeGstin, setConsigneeGstin] = useState('');
   const [consigneeState, setConsigneeState] = useState('');
   const [consigneeStateCode, setConsigneeStateCode] = useState('');
 
   // Buyer (Bill to)
   const [buyerName, setBuyerName] = useState(sheet?.customerName || '');
-  const [buyerAddress, setBuyerAddress] = useState('');
+  const [buyerAddress, setBuyerAddress] = useState(sheet?.customerAddress || '');
   const [buyerGstin, setBuyerGstin] = useState('');
   const [buyerState, setBuyerState] = useState('');
   const [buyerStateCode, setBuyerStateCode] = useState('');

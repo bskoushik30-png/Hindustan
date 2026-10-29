@@ -25,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
   return (
     <>
       <header
-        className="no-print"
+        className="no-print app-header"
         style={{
           backgroundColor: 'var(--bg-surface)',
           borderBottom: '1px solid var(--border-medium)',
@@ -36,60 +36,63 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
         }}
       >
         <div
+          className="header-inner"
           style={{
             maxWidth: '1440px',
             margin: '0 auto',
-            padding: '0.75rem 1.5rem',
+            padding: '0.65rem 1.25rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1rem',
-            flexWrap: 'wrap'
+            gap: '0.75rem'
           }}
         >
           {/* Logo & Brand */}
           <div
-            style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', cursor: 'pointer' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', cursor: 'pointer', minWidth: 0, flexShrink: 1 }}
             onClick={() => onNavigate('dashboard')}
           >
             <img
               src="/logo-icon-transparent.png"
               alt="Hindustan Saw Mill Logo"
               style={{
-                width: '42px',
-                height: '42px',
+                width: '38px',
+                height: '38px',
                 objectFit: 'contain',
+                flexShrink: 0,
                 filter: 'drop-shadow(0 2px 6px rgba(38, 29, 21, 0.2))'
               }}
             />
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span style={{ fontSize: '1.15rem', fontWeight: 900, letterSpacing: '0.02em', color: 'var(--text-main)', textTransform: 'uppercase' }}>
-                  HINDUSTAN <span style={{ color: 'var(--primary-600)', fontSize: '0.9rem', fontWeight: 700 }}>SAW MILL</span>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'nowrap' }}>
+                <span className="brand-title" style={{ fontSize: '1.05rem', fontWeight: 900, letterSpacing: '0.02em', color: 'var(--text-main)', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+                  HINDUSTAN <span style={{ color: 'var(--primary-600)', fontSize: '0.85rem', fontWeight: 700 }}>SAW MILL</span>
                 </span>
                 <span
+                  className="brand-badge-since"
                   style={{
-                    fontSize: '0.65rem',
+                    fontSize: '0.62rem',
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     backgroundColor: 'rgba(140, 84, 43, 0.12)',
                     border: '1px solid var(--primary-300)',
-                    padding: '2px 6px',
+                    padding: '1px 5px',
                     borderRadius: '4px',
-                    color: 'var(--primary-700)'
+                    color: 'var(--primary-700)',
+                    whiteSpace: 'nowrap'
                   }}
                 >
                   SINCE 1971
                 </span>
               </div>
-              <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.02em' }}>
+              <p className="brand-subtitle" style={{ margin: 0, fontSize: '0.73rem', color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>
                 Wood Industries &bull; Precision CFT &amp; SQFT Calculator
               </p>
             </div>
           </div>
 
-          {/* Navigation Links */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+          {/* Desktop Navigation Links (Hidden on Mobile) */}
+          <nav className="desktop-nav">
             <button
               type="button"
               className={`btn btn-sm ${currentView === 'dashboard' ? 'btn-primary' : 'btn-ghost'}`}
@@ -131,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
           </nav>
 
           {/* Status & User Actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
             {/* Supabase Connection Pill */}
             <button
               type="button"
@@ -140,13 +143,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
               style={{
                 cursor: 'pointer',
                 border: 'none',
-                padding: '0.35rem 0.65rem',
-                fontSize: '0.75rem'
+                padding: '0.35rem 0.55rem',
+                fontSize: '0.72rem',
+                whiteSpace: 'nowrap'
               }}
               title="Click to configure Supabase Cloud Database"
             >
               <Database size={13} />
-              {isSupabaseConnected ? 'Supabase Live' : 'Demo Mode (Offline)'}
+              <span className="supabase-pill-long-text">
+                {isSupabaseConnected ? 'Supabase Live' : 'Demo Mode (Offline)'}
+              </span>
+              <span className="supabase-pill-short-text">
+                {isSupabaseConnected ? 'Live' : 'Demo'}
+              </span>
             </button>
 
             {/* User Profile / Menu */}
@@ -279,6 +288,45 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
           </div>
         </div>
       </header>
+
+      {/* Mobile Bottom Navigation Bar (Fixed for quick thumb navigation on phones) */}
+      <nav className="mobile-bottom-nav no-print" aria-label="Mobile Navigation">
+        <button
+          type="button"
+          className={`mobile-nav-item ${currentView === 'dashboard' ? 'active' : ''}`}
+          onClick={() => onNavigate('dashboard')}
+        >
+          <LayoutDashboard size={20} />
+          <span>Dashboard</span>
+        </button>
+
+        <button
+          type="button"
+          className={`mobile-nav-item ${currentView === 'calculator' ? 'active' : ''}`}
+          onClick={() => onNavigate('calculator')}
+        >
+          <Calculator size={20} />
+          <span>Calculator</span>
+        </button>
+
+        <button
+          type="button"
+          className={`mobile-nav-item ${currentView === 'history' ? 'active' : ''}`}
+          onClick={() => onNavigate('history')}
+        >
+          <FileSpreadsheet size={20} />
+          <span>Saved</span>
+        </button>
+
+        <button
+          type="button"
+          className={`mobile-nav-item ${currentView === 'settings' ? 'active' : ''}`}
+          onClick={() => onNavigate('settings')}
+        >
+          <Settings size={20} />
+          <span>Settings</span>
+        </button>
+      </nav>
 
       {/* Supabase Connection Setup Modal */}
       <SupabaseConfigModal

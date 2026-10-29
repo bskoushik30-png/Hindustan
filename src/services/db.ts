@@ -50,6 +50,8 @@ export function sanitizeAndComputeSheet(
     userId,
     sheetName: sheet.sheetName?.trim() || 'Untitled Measurement Sheet',
     customerName: sheet.customerName?.trim() || '',
+    customerPhone: sheet.customerPhone?.trim() || '',
+    customerAddress: sheet.customerAddress?.trim() || '',
     projectName: sheet.projectName?.trim() || '',
     referenceNumber: sheet.referenceNumber?.trim() || `REF-${Date.now().toString().slice(-6)}`,
     measurementDate: sheet.measurementDate || new Date().toISOString().split('T')[0],

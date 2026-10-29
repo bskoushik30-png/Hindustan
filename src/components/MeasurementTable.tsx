@@ -148,8 +148,108 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-      <div className="table-responsive">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      {/* 1. Quick Dimension Entry Form (Prominent at top for instant daily tallying) */}
+      <form onSubmit={handleQuickAdd} className="quick-add-bar no-print">
+        <div className="quick-add-header-title">
+          <CornerDownLeft size={16} color="var(--primary-600)" />
+          <span>Quick Dimension Entry:</span>
+        </div>
+
+        <div className="quick-add-dims">
+          <div className="quick-dim-col">
+            <label className="quick-dim-label">Length (ft)</label>
+            <input
+              ref={lengthInputRef}
+              type="number"
+              step="any"
+              min="0"
+              placeholder="e.g. 10"
+              className="calc-input"
+              value={quickLength}
+              onChange={(e) => setQuickLength(e.target.value)}
+              required
+            />
+          </div>
+          <span className="quick-dim-mult">&times;</span>
+          <div className="quick-dim-col">
+            <label className="quick-dim-label">Width (in)</label>
+            <input
+              type="number"
+              step="any"
+              min="0"
+              placeholder="e.g. 5"
+              className="calc-input"
+              value={quickWidth}
+              onChange={(e) => setQuickWidth(e.target.value)}
+              required
+            />
+          </div>
+          <span className="quick-dim-mult">&times;</span>
+          <div className="quick-dim-col">
+            <label className="quick-dim-label">Thick (in)</label>
+            <input
+              type="number"
+              step="any"
+              min="0"
+              placeholder="e.g. 3"
+              className="calc-input"
+              value={quickThickness}
+              onChange={(e) => setQuickThickness(e.target.value)}
+              required
+            />
+          </div>
+          <span className="quick-dim-mult">&times;</span>
+          <div className="quick-dim-col">
+            <label className="quick-dim-label">Pieces</label>
+            <input
+              type="number"
+              step="1"
+              min="1"
+              placeholder="e.g. 20"
+              className="calc-input"
+              value={quickPieces}
+              onChange={(e) => setQuickPieces(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="quick-add-row-bottom">
+          <div className="quick-add-species">
+            <input
+              type="text"
+              placeholder="Wood species (optional, e.g. Teak, Mahogany, Sal)"
+              value={quickWoodType}
+              onChange={(e) => setQuickWoodType(e.target.value)}
+              style={{ fontSize: '0.85rem', padding: '0.45rem 0.65rem' }}
+            />
+          </div>
+
+          <div className="quick-add-actions">
+            <button type="submit" className="btn btn-primary btn-sm" title="Add measurement row (Enter)">
+              <Plus size={16} /> Add Row
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={handleAddEmptyRow}
+              title="Add empty blank row"
+            >
+              Blank Row
+            </button>
+          </div>
+        </div>
+      </form>
+
+      {quickError && (
+        <div style={{ fontSize: '0.82rem', color: 'var(--danger-400)', display: 'flex', alignItems: 'center', gap: '0.35rem', padding: '0.25rem 0.5rem' }}>
+          <AlertCircle size={14} /> {quickError}
+        </div>
+      )}
+
+      {/* 2. Desktop Full 9-Column Spreadsheet Table (Visible on Desktop / Tablets) */}
+      <div className="table-responsive desktop-tally-table">
         <table className="calc-table">
           <thead>
             <tr>
@@ -167,24 +267,15 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
           <tbody>
             {items.length === 0 ? (
               <tr>
-                <td colSpan={9} style={{ textAlign: 'center', padding: '3.5rem 1rem', color: 'var(--text-muted)' }}>
+                <td colSpan={9} style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--text-muted)' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
                     <AlertCircle size={36} color="var(--primary-600)" />
                     <p style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text-main)', margin: 0 }}>
                       No measurement rows yet
                     </p>
                     <p style={{ fontSize: '0.88rem', margin: 0, maxWidth: '420px' }}>
-                      Use the quick-entry bar below to tally lumber or click &ldquo;Add Blank Row&rdquo;.
-                      Formula: (Length &times; Width &times; Thickness &times; Pieces) &divide; 144.
+                      Enter dimensions above and click &ldquo;Add Row&rdquo; to start recording timber measurements.
                     </p>
-                    <button
-                      type="button"
-                      className="btn btn-primary btn-sm"
-                      onClick={handleAddEmptyRow}
-                      style={{ marginTop: '0.5rem' }}
-                    >
-                      <Plus size={16} /> Add First Row
-                    </button>
                   </div>
                 </td>
               </tr>
@@ -198,12 +289,10 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
 
                 return (
                   <tr key={item.id} style={{ opacity: isRowValid ? 1 : 0.85 }}>
-                    {/* 1. Serial Number */}
                     <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 600, color: 'var(--text-subtle)' }}>
                       {item.serialNumber}
                     </td>
 
-                    {/* 2. Wood Species / Type */}
                     <td>
                       <input
                         type="text"
@@ -214,7 +303,6 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
                       />
                     </td>
 
-                    {/* 3. Length (Feet) */}
                     <td>
                       <input
                         type="number"
@@ -227,7 +315,6 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
                       />
                     </td>
 
-                    {/* 4. Width (Inches) */}
                     <td>
                       <input
                         type="number"
@@ -240,7 +327,6 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
                       />
                     </td>
 
-                    {/* 5. Thickness (Inches) */}
                     <td>
                       <input
                         type="number"
@@ -253,7 +339,6 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
                       />
                     </td>
 
-                    {/* 6. Pieces */}
                     <td>
                       <input
                         type="number"
@@ -266,17 +351,14 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
                       />
                     </td>
 
-                    {/* 7. Total CFT */}
                     <td className="col-numeric col-cft">
                       {formatValue(item.cft, 3)}
                     </td>
 
-                    {/* 8. Total SQFT */}
                     <td className="col-numeric col-sqft">
                       {formatValue(item.sqft, 3)}
                     </td>
 
-                    {/* 9. Actions */}
                     <td style={{ textAlign: 'center' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}>
                         <button
@@ -305,98 +387,64 @@ export const MeasurementTable: React.FC<MeasurementTableProps> = ({
             )}
           </tbody>
         </table>
-
-        {/* Quick Add Bottom Bar for Fast Tallying */}
-        <form onSubmit={handleQuickAdd} className="quick-add-bar no-print">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '140px' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--primary-400)', letterSpacing: '0.04em' }}>
-              Quick Entry:
-            </span>
-            <input
-              type="text"
-              placeholder="Species (optional)"
-              value={quickWoodType}
-              onChange={(e) => setQuickWoodType(e.target.value)}
-              style={{ fontSize: '0.85rem', padding: '0.45rem 0.6rem' }}
-            />
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <div style={{ width: '88px' }}>
-              <input
-                ref={lengthInputRef}
-                type="number"
-                step="any"
-                min="0"
-                placeholder="Length (ft)"
-                className="calc-input"
-                value={quickLength}
-                onChange={(e) => setQuickLength(e.target.value)}
-                required
-              />
-            </div>
-            <span style={{ color: 'var(--text-subtle)', fontSize: '0.8rem' }}>&times;</span>
-            <div style={{ width: '88px' }}>
-              <input
-                type="number"
-                step="any"
-                min="0"
-                placeholder="Width (in)"
-                className="calc-input"
-                value={quickWidth}
-                onChange={(e) => setQuickWidth(e.target.value)}
-                required
-              />
-            </div>
-            <span style={{ color: 'var(--text-subtle)', fontSize: '0.8rem' }}>&times;</span>
-            <div style={{ width: '88px' }}>
-              <input
-                type="number"
-                step="any"
-                min="0"
-                placeholder="Thick (in)"
-                className="calc-input"
-                value={quickThickness}
-                onChange={(e) => setQuickThickness(e.target.value)}
-                required
-              />
-            </div>
-            <span style={{ color: 'var(--text-subtle)', fontSize: '0.8rem' }}>&times;</span>
-            <div style={{ width: '75px' }}>
-              <input
-                type="number"
-                step="1"
-                min="1"
-                placeholder="Pieces"
-                className="calc-input"
-                value={quickPieces}
-                onChange={(e) => setQuickPieces(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <button type="submit" className="btn btn-primary btn-sm" title="Add measurement row (Enter)">
-              <CornerDownLeft size={15} /> Add Row
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm"
-              onClick={handleAddEmptyRow}
-              title="Add empty blank row"
-            >
-              <Plus size={15} /> Blank Row
-            </button>
-          </div>
-        </form>
       </div>
 
-      {quickError && (
-        <div style={{ fontSize: '0.82rem', color: 'var(--danger-400)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-          <AlertCircle size={14} /> {quickError}
-        </div>
-      )}
+      {/* 3. Mobile Fixed Tally View (100% width, Zero Horizontal Scrolling for Phones) */}
+      <div className="mobile-tally-view">
+        {items.length === 0 ? (
+          <div className="mobile-empty-tally">
+            <AlertCircle size={28} color="var(--primary-600)" />
+            <p style={{ margin: 0, fontWeight: 700, fontSize: '0.92rem' }}>No measurement lines yet</p>
+            <p style={{ margin: '0.2rem 0 0', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+              Enter dimensions above and tap <strong>&ldquo;Add Row&rdquo;</strong>
+            </p>
+          </div>
+        ) : (
+          <div className="mobile-tally-list">
+            <div className="mobile-tally-header-row">
+              <span style={{ width: '28px', textAlign: 'center' }}>#</span>
+              <span style={{ flex: 1 }}>Dimensions (L &times; W &times; T)</span>
+              <span style={{ width: '45px', textAlign: 'right' }}>Pcs</span>
+              <span style={{ width: '80px', textAlign: 'right' }}>CFT</span>
+              <span style={{ width: '32px' }}></span>
+            </div>
+
+            {items.map((item, index) => (
+              <div key={item.id} className="mobile-tally-item">
+                <span className="mobile-sn">#{item.serialNumber}</span>
+
+                <div className="mobile-dims-info">
+                  <div className="mobile-dims-val">
+                    <strong>{item.lengthFeet || 0}&prime;</strong> &times; {item.widthInches || 0}&Prime; &times; {item.thicknessInches || 0}&Prime;
+                  </div>
+                  {item.woodType && (
+                    <div className="mobile-species-tag">{item.woodType}</div>
+                  )}
+                </div>
+
+                <span className="mobile-pcs-val">{item.pieces || 0}</span>
+
+                <div className="mobile-cft-val">
+                  {formatValue(item.cft, 3)}
+                  <span className="mobile-cft-unit">CFT</span>
+                </div>
+
+                <div className="mobile-row-actions">
+                  <button
+                    type="button"
+                    className="btn btn-ghost btn-sm"
+                    onClick={() => handleDeleteRow(index)}
+                    style={{ padding: '4px', color: 'var(--danger-400)' }}
+                    title="Delete row"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

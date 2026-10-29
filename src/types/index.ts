@@ -23,6 +23,8 @@ export interface MeasurementSheet {
   userId: string;
   sheetName: string;
   customerName: string;
+  customerPhone?: string;
+  customerAddress?: string;
   projectName: string;
   referenceNumber: string;
   measurementDate: string;
