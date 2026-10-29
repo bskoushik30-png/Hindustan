@@ -118,16 +118,16 @@ const MainApp: React.FC = () => {
       <footer
         className="no-print"
         style={{
-          borderTop: '1px solid var(--border-light)',
+          borderTop: '1px solid var(--border-medium)',
           padding: '1.5rem',
           textAlign: 'center',
           fontSize: '0.82rem',
-          color: 'var(--text-subtle)',
-          backgroundColor: '#0a140f'
+          color: 'var(--text-muted)',
+          backgroundColor: 'var(--bg-surface)'
         }}
       >
         <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)' }}>
             <img src="/logo-icon-transparent.png" alt="Logo" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
             <strong>Hindustan Saw Mill &amp; Wood Industries</strong> &mdash; Since 1971 &bull; CFT &amp; SQFT Calculator Suite
           </div>

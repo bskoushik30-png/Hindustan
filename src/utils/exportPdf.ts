@@ -17,8 +17,8 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
   const phone = settings?.phone || '+91 (0) 98765 43210';
   const email = settings?.email || 'info@hindustansawmill.com';
 
-  // --- Top Forest Green Brand Header ---
-  doc.setFillColor(27, 67, 50); // Dark forest green #1b4332
+  // --- Top Warm Timber Brand Header ---
+  doc.setFillColor(61, 38, 20); // Deep roasted espresso / timber walnut
   doc.rect(0, 0, 210, 30, 'F');
 
   // Draw Logo Icon
@@ -39,11 +39,11 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
   doc.text(tagline.toUpperCase(), 40, 17);
 
   doc.setFontSize(7.5);
-  doc.setTextColor(210, 235, 220);
+  doc.setTextColor(235, 224, 212);
   doc.text(`${phone}  |  ${email}  |  ${address}`, 40, 23);
 
   // Document Title Badge on Right
-  doc.setFillColor(45, 106, 79);
+  doc.setFillColor(140, 84, 43); // Warm saddle timber
   doc.roundedRect(144, 5, 52, 19, 2, 2, 'F');
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(9.5);
@@ -129,7 +129,7 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
     body: tableRows,
     theme: 'grid',
     headStyles: {
-      fillColor: [27, 67, 50],
+      fillColor: [61, 38, 20],
       textColor: [255, 255, 255],
       fontStyle: 'bold',
       halign: 'center',
@@ -148,10 +148,10 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
     styles: {
       fontSize: 8,
       cellPadding: 2.2,
-      textColor: [30, 35, 32]
+      textColor: [38, 29, 21]
     },
     alternateRowStyles: {
-      fillColor: [248, 250, 249]
+      fillColor: [250, 246, 238]
     },
     margin: { left: 14, right: 14 }
   });
@@ -167,10 +167,10 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
   }
 
   // --- Grand Totals Summary Card ---
-  doc.setFillColor(27, 67, 50);
+  doc.setFillColor(61, 38, 20);
   doc.roundedRect(100, currentY, 96, 32, 2, 2, 'F');
 
-  doc.setTextColor(210, 235, 220);
+  doc.setTextColor(235, 224, 212);
   doc.setFontSize(8.5);
   doc.setFont('helvetica', 'normal');
   doc.text('TOTAL PIECES:', 106, currentY + 9);
@@ -179,7 +179,7 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
   doc.setFontSize(10);
   doc.text(`${sheet.totalPieces} Pcs`, 155, currentY + 9);
 
-  doc.setTextColor(210, 235, 220);
+  doc.setTextColor(235, 224, 212);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.text('GRAND TOTAL CFT:', 106, currentY + 18);
@@ -188,7 +188,7 @@ export function exportSheetToPdf(sheet: MeasurementSheet, settings?: BusinessSet
   doc.setFontSize(12);
   doc.text(`${formatValue(sheet.totalCft, 3)} CFT`, 155, currentY + 18);
 
-  doc.setTextColor(210, 235, 220);
+  doc.setTextColor(235, 224, 212);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.text('GRAND TOTAL SQFT:', 106, currentY + 26);

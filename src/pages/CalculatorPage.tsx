@@ -12,12 +12,14 @@ import {
   User,
   Calendar,
   Hash,
-  Share2
+  Share2,
+  FileText
 } from 'lucide-react';
 import type { MeasurementItem, MeasurementSheet, BusinessSettings } from '../types';
 import { SummaryCards } from '../components/SummaryCards';
 import { MeasurementTable } from '../components/MeasurementTable';
 import { ConfirmModal } from '../components/ConfirmModal';
+import { ProformaInvoiceModal } from '../components/ProformaInvoiceModal';
 import { calculateTotals } from '../utils/calculator';
 import { exportSheetToCsv } from '../utils/exportCsv';
 import { exportSheetToPdf } from '../utils/exportPdf';
@@ -61,6 +63,7 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved' | 'error'>('saved');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isClearModalOpen, setIsClearModalOpen] = useState(false);
+  const [isProformaModalOpen, setIsProformaModalOpen] = useState(false);
   const isInitialMount = useRef(true);
 
   // Sync state if sheetToEdit prop changes
@@ -275,6 +278,21 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({
           <button
             type="button"
             className="btn btn-secondary btn-sm"
+            onClick={() => setIsProformaModalOpen(true)}
+            title="Generate & View Proforma Invoice in Industrial Tally Format"
+            style={{
+              borderColor: 'var(--primary-400)',
+              backgroundColor: 'rgba(140, 84, 43, 0.12)',
+              color: 'var(--primary-700)',
+              fontWeight: 600
+            }}
+          >
+            <FileText size={15} /> Proforma Invoice
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
             onClick={handleExportCsv}
             title="Download Excel-compatible CSV tally file"
           >
@@ -431,6 +449,14 @@ export const CalculatorPage: React.FC<CalculatorPageProps> = ({
         isDestructive={true}
         onConfirm={handleClearAll}
         onCancel={() => setIsClearModalOpen(false)}
+      />
+
+      {/* Proforma Invoice A4 Industrial Modal */}
+      <ProformaInvoiceModal
+        isOpen={isProformaModalOpen}
+        onClose={() => setIsProformaModalOpen(false)}
+        sheet={getCurrentSheetObject()}
+        businessSettings={businessSettings}
       />
     </div>
   );

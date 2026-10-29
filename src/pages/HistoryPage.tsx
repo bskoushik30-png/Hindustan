@@ -11,13 +11,15 @@ import {
   ExternalLink,
   Edit2,
   Filter,
-  FileSpreadsheet
+  FileSpreadsheet,
+  FileText
 } from 'lucide-react';
 import type { MeasurementSheet, BusinessSettings } from '../types';
 import { dbService } from '../services/db';
 import { formatCompact, formatValue } from '../utils/calculator';
 import { useAuth } from '../contexts/AuthContext';
 import { ConfirmModal } from '../components/ConfirmModal';
+import { ProformaInvoiceModal } from '../components/ProformaInvoiceModal';
 import { exportSheetToPdf } from '../utils/exportPdf';
 import { exportSheetToCsv } from '../utils/exportCsv';
 
@@ -41,6 +43,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
 
   const [sheetToDelete, setSheetToDelete] = useState<MeasurementSheet | null>(null);
   const [editingSheet, setEditingSheet] = useState<{ id: string; name: string } | null>(null);
+  const [proformaSheet, setProformaSheet] = useState<MeasurementSheet | null>(null);
 
   useEffect(() => {
     loadSheets();
@@ -380,6 +383,19 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                         <button
                           type="button"
                           className="btn btn-ghost btn-sm"
+                          title="View &amp; Print Proforma Invoice (Tally Format)"
+                          style={{ padding: '5px', color: '#6ee7b7' }}
+                          onClick={async () => {
+                            const full = await dbService.getSheetById(sheet.id, user?.id || '');
+                            if (full) setProformaSheet(full);
+                          }}
+                        >
+                          <FileText size={14} />
+                        </button>
+
+                        <button
+                          type="button"
+                          className="btn btn-ghost btn-sm"
                           title="Export CSV"
                           style={{ padding: '5px' }}
                           onClick={async () => {
@@ -428,6 +444,14 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
         isDestructive={true}
         onConfirm={confirmDelete}
         onCancel={() => setSheetToDelete(null)}
+      />
+
+      {/* Proforma Invoice Modal */}
+      <ProformaInvoiceModal
+        isOpen={proformaSheet !== null}
+        onClose={() => setProformaSheet(null)}
+        sheet={proformaSheet}
+        businessSettings={businessSettings}
       />
     </div>
   );

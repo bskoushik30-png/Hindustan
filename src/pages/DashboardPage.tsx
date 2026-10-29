@@ -90,10 +90,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       {/* Welcome Banner Card */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #163422 0%, #102317 100%)',
+          background: 'linear-gradient(135deg, #f3ebe0 0%, #e6d7c3 100%)',
           borderRadius: 'var(--radius-xl)',
           padding: '2rem 2.25rem',
-          border: '1px solid rgba(78, 170, 121, 0.25)',
+          border: '1px solid var(--border-medium)',
           boxShadow: 'var(--shadow-md)',
           display: 'flex',
           justifyContent: 'space-between',
@@ -110,7 +110,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               width: '64px',
               height: '64px',
               objectFit: 'contain',
-              filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4))'
+              filter: 'drop-shadow(0 4px 12px rgba(38, 29, 21, 0.2))'
             }}
           />
           <div>
@@ -120,9 +120,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   fontSize: '0.75rem',
                   fontWeight: 700,
                   textTransform: 'uppercase',
-                  backgroundColor: 'rgba(217, 155, 38, 0.2)',
-                  color: 'var(--amber-300)',
-                  border: '1px solid rgba(217, 155, 38, 0.35)',
+                  backgroundColor: 'rgba(140, 84, 43, 0.12)',
+                  color: 'var(--primary-700)',
+                  border: '1px solid var(--primary-300)',
                   padding: '3px 8px',
                   borderRadius: '4px'
                 }}
@@ -133,7 +133,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 Logged in as {user?.email}
               </span>
             </div>
-            <h1 style={{ fontSize: '1.85rem', color: '#ffffff', margin: 0 }}>
+            <h1 style={{ fontSize: '1.85rem', color: 'var(--text-main)', margin: 0 }}>
               Welcome back, {user?.fullName || 'Mill Sawyer'}
             </h1>
             <p style={{ margin: '0.5rem 0 0', color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '580px' }}>
@@ -148,7 +148,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           type="button"
           className="btn btn-primary btn-lg"
           onClick={onNewSheet}
-          style={{ boxShadow: '0 4px 14px rgba(42, 99, 68, 0.5)' }}
+          style={{ boxShadow: '0 4px 14px rgba(140, 84, 43, 0.35)' }}
         >
           <Plus size={20} /> Create New Measurement Sheet
         </button>
@@ -184,12 +184,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
           <div className="summary-card highlight-cft">
             <div className="summary-label">
-              <Box size={16} color="var(--primary-400)" />
+              <Box size={16} color="var(--primary-600)" />
               <span>Total Volume</span>
             </div>
-            <div className="summary-value" style={{ color: '#52b788' }}>
+            <div className="summary-value" style={{ color: 'var(--primary-700)' }}>
               {formatValue(totalCumulativeCft, 3)}
-              <span className="summary-unit" style={{ color: '#52b788' }}>CFT</span>
+              <span className="summary-unit" style={{ color: 'var(--primary-600)' }}>CFT</span>
             </div>
           </div>
 

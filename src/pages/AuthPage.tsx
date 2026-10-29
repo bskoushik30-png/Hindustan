@@ -85,7 +85,7 @@ export const AuthPage: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         padding: '2rem 1rem',
-        background: 'radial-gradient(ellipse at top, #163422 0%, #0a140f 100%)'
+        background: 'radial-gradient(ellipse at top, #f0e6d6 0%, #dfd0bb 100%)'
       }}
     >
       <div
@@ -94,10 +94,10 @@ export const AuthPage: React.FC = () => {
           maxWidth: '460px',
           width: '100%',
           padding: '2.25rem',
-          backgroundColor: 'rgba(18, 29, 23, 0.95)',
+          backgroundColor: 'var(--bg-card)',
           backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(78, 170, 121, 0.3)',
-          boxShadow: '0 20px 45px rgba(0, 0, 0, 0.6)'
+          border: '1px solid var(--border-medium)',
+          boxShadow: 'var(--shadow-lg)'
         }}
       >
         {/* Brand Header */}
@@ -110,14 +110,15 @@ export const AuthPage: React.FC = () => {
               width: '100%',
               height: 'auto',
               borderRadius: '8px',
-              boxShadow: '0 4px 18px rgba(0, 0, 0, 0.4)',
+              boxShadow: 'var(--shadow-sm)',
               marginBottom: '1rem',
-              backgroundColor: '#f7f4ea',
+              backgroundColor: '#ffffff',
+              border: '1px solid var(--border-light)',
               padding: '8px 12px'
             }}
           />
-          <h1 style={{ fontSize: '1.35rem', margin: 0, color: '#ffffff', fontWeight: 800, textTransform: 'uppercase' }}>
-            HINDUSTAN <span style={{ color: 'var(--amber-400)' }}>SAW MILL</span>
+          <h1 style={{ fontSize: '1.35rem', margin: 0, color: 'var(--text-main)', fontWeight: 800, textTransform: 'uppercase' }}>
+            HINDUSTAN <span style={{ color: 'var(--primary-600)' }}>SAW MILL</span>
           </h1>
           <p style={{ margin: '0.35rem 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             Wood Industries &bull; Since 1971 &bull; CFT &amp; SQFT Calculator

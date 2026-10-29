@@ -27,12 +27,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
       <header
         className="no-print"
         style={{
-          backgroundColor: '#0c1811',
+          backgroundColor: 'var(--bg-surface)',
           borderBottom: '1px solid var(--border-medium)',
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.4)'
+          boxShadow: 'var(--shadow-sm)'
         }}
       >
         <div
@@ -59,24 +59,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
                 width: '42px',
                 height: '42px',
                 objectFit: 'contain',
-                filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5))'
+                filter: 'drop-shadow(0 2px 6px rgba(38, 29, 21, 0.2))'
               }}
             />
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span style={{ fontSize: '1.15rem', fontWeight: 900, letterSpacing: '0.02em', color: '#ffffff', textTransform: 'uppercase' }}>
-                  HINDUSTAN <span style={{ color: 'var(--amber-400)', fontSize: '0.9rem', fontWeight: 700 }}>SAW MILL</span>
+                <span style={{ fontSize: '1.15rem', fontWeight: 900, letterSpacing: '0.02em', color: 'var(--text-main)', textTransform: 'uppercase' }}>
+                  HINDUSTAN <span style={{ color: 'var(--primary-600)', fontSize: '0.9rem', fontWeight: 700 }}>SAW MILL</span>
                 </span>
                 <span
                   style={{
                     fontSize: '0.65rem',
                     fontWeight: 700,
                     textTransform: 'uppercase',
-                    backgroundColor: 'rgba(217, 155, 38, 0.18)',
-                    border: '1px solid rgba(217, 155, 38, 0.35)',
+                    backgroundColor: 'rgba(140, 84, 43, 0.12)',
+                    border: '1px solid var(--primary-300)',
                     padding: '2px 6px',
                     borderRadius: '4px',
-                    color: 'var(--amber-300)'
+                    color: 'var(--primary-700)'
                   }}
                 >
                   SINCE 1971
@@ -163,8 +163,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, activeS
                       width: '24px',
                       height: '24px',
                       borderRadius: '50%',
-                      backgroundColor: 'var(--primary-800)',
-                      color: 'var(--primary-400)',
+                      backgroundColor: 'var(--primary-100)',
+                      color: 'var(--primary-800)',
+                      border: '1px solid var(--primary-200)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',

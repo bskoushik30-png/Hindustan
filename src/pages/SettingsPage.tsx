@@ -284,7 +284,7 @@ CREATE POLICY "Allow all on measurement_items" ON public.measurement_items FOR A
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* CFT Rule Display */}
           <div style={{ backgroundColor: 'var(--bg-surface)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-            <h4 style={{ fontSize: '0.95rem', margin: '0 0 0.35rem', color: '#52b788' }}>
+            <h4 style={{ fontSize: '0.95rem', margin: '0 0 0.35rem', color: 'var(--primary-700)' }}>
               CFT (Cubic Feet) Calculation Rule
             </h4>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: 'var(--text-main)', padding: '0.5rem', backgroundColor: 'var(--bg-input)', borderRadius: '4px', marginBottom: '0.5rem' }}>

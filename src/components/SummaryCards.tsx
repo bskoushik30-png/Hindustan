@@ -37,12 +37,12 @@ export const SummaryCards: React.FC<SummaryCardsProps> = ({ totals }) => {
       {/* 3. Grand Total CFT */}
       <div className="summary-card highlight-cft">
         <div className="summary-label">
-          <Box size={16} color="var(--primary-400)" />
+          <Box size={16} color="var(--primary-600)" />
           <span>Grand Total CFT</span>
         </div>
-        <div className="summary-value" style={{ color: '#52b788' }}>
+        <div className="summary-value" style={{ color: 'var(--primary-700)' }}>
           {formatValue(totals.totalCft, 3)}
-          <span className="summary-unit" style={{ color: '#52b788' }}>CFT</span>
+          <span className="summary-unit" style={{ color: 'var(--primary-600)' }}>CFT</span>
         </div>
       </div>
 
